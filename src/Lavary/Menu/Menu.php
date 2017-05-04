@@ -42,7 +42,11 @@ class Menu {
 			}
 			
 			// Registering the items
-			call_user_func($callback, $this->menu[$name]);
+			$user_menu = call_user_func($callback, $this->menu[$name]);
+
+			if($user_menu instanceof Builder) {
+				$this->menu[$name] = $user_menu;
+			}
 			
 			// Storing each menu instance in the collection
 			$this->collection->put($name, $this->menu[$name]);
